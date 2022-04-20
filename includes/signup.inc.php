@@ -1,8 +1,8 @@
 <?php
 
 
-if(isset($_POST['submit'])){
-    
+if (isset($_POST['submit'])) {
+
 
 
     $firstname = $_POST['firstname'];
@@ -13,53 +13,53 @@ if(isset($_POST['submit'])){
     $usertype = $_POST['usertype'];
 
     //Error checking starts here
-
     require_once 'dfunctions.inc.php';
     require_once 'functions.inc.php';
 
-    if(emptyInputSignup($firstname, $lastname, $email, $pwd, $pwdRepeat) !== false){
+    $is_connected = connectDB();
+    initDB($is_connected);
+
+    if (emptyInputSignup($firstname, $lastname, $email, $pwd, $pwdRepeat) !== false) {
         header("location: ../index.php?error=emptyinput");
         exit();
     }
 
-    if(invalidFirstName($firstname) !== false){
-        header("location: ../index.php?error=invalidemal");
+    if (invalidFirstName($firstname) !== false) {
+        header("location: ../index.php?error=invalidfirstname");
         exit();
     }
 
-    if(invalidLastName($lastname) !== false){
-        header("location: ../index.php?error=invalidemal");
+    if (invalidLastName($lastname) !== false) {
+        header("location: ../index.php?error=invalidlastname");
         exit();
     }
 
-    if(invalidEmail($email) !== false){
-        header("location: ../index.php?error=invalidemal");
+    if (invalidEmail($email) !== false) {
+        header("location: ../index.php?error=invalidemail");
         exit();
     }
 
-    if(pwdMatch($pwd, $pwdRepeat) !== false){
+    if (pwdMatch($pwd, $pwdRepeat) !== false) {
         header("location: ../index.php?error=pwdnotmatch");
         exit();
     }
 
-   // if(emailExists($is_connected, $email) !== false){
-  //      header("location: ../index.php?error=usernametaken");
-  //      exit();
-  //  }
+    if (userSignUpCheck($is_connected, $email) == false) {
+        header("location: ../index.php?error=useralreadyexists");
+        exit();
+    }
 
-  //  if(weakPassword($pws) !== false){
-  //      header("location: ../index.php?error=weakpassword");
-  //      exit();
-   // }
+    //  if(weakPassword($pws) !== false){
+    //      header("location: ../index.php?error=weakpassword");
+    //      exit();
+    // }
 
 
 
-   // userInsert($is_connected, $firstname, $lastname, $email, $pwd, $usertype);
-
-   header("location: ../index.php?error=none");
-    
-}else{
-   header("location: ../index.php");
-   exit();
+    userInsert($is_connected, $firstname, $lastname, $email, $pwd, $usertype);
+    header("location: ../index.php?error=none");
+    mysqli_close($is_connected);
+} else {
+    header("location: ../index.php");
+    exit();
 }
-
