@@ -46,10 +46,6 @@
 
     </section>
 
-    <!--Error handlers-->
-
-
-
 
 <?php
     include_once 'php/footer.php';

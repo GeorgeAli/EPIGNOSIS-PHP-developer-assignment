@@ -44,15 +44,15 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
-    if (userSignUpCheck($is_connected, $email) == false) {
-        header("location: ../index.php?error=useralreadyexists");
-        exit();
-    }
+  //  if (userSignUpCheck($is_connected, $email) !== false) {
+ //       header("location: ../index.php?error=useralreadyexists");
+ //       exit();
+//    }
 
-    //  if(weakPassword($pws) !== false){
-    //      header("location: ../index.php?error=weakpassword");
-    //      exit();
-    // }
+    if(weakPassword($pwd) !== false){
+          header("location: ../index.php?error=weakpassword");
+          exit();
+    }
 
 
 

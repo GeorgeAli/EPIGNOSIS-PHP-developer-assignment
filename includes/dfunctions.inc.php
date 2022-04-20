@@ -39,7 +39,7 @@ function initDB($is_connected)
         $query .= "INSERT INTO users VALUES (4, 'Nikos', 'Stathakis', 'x123xaz', 'Nikos@epignosis.com', 0);";
         $query .= "INSERT INTO users VALUES (5, 'Tasos', 'Karagianopoulos', 'v25cqW', 'Tasos@epignosis.com', 0);";
         $query .= "INSERT INTO users VALUES (6, 'Marios', 'Alivertis' , '2V5# 24 5 ', 'Marios@epignosis.com', 0);";
-        $query .= "INSERT INTO users VALUES (7, 'Sofia', 'Gounari' ,'', 'Sofia@epignosis.com', 0);";
+        $query .= "INSERT INTO users VALUES (7, 'Sofia', 'Gounari' ,':-)', 'Sofia@epignosis.com', 0);";
         $query .= "INSERT INTO users VALUES (8, 'Maria', 'Gounari' ,'empty', 'Maria@epignosis.com', 0);";
         $query .= "INSERT INTO users VALUES (9, 'Eleni', 'Andreou' ,'DROP DATABASE', 'Eleni@epignosis.com', 0);";
         $query .= "INSERT INTO users VALUES (10, 'Euthimia', 'Panagiotopoulou','admin', 'Euthimia@epignosis.com', 0);";
@@ -95,7 +95,7 @@ function userSignUpCheck($is_connected, $temp_email)
     $result_set = mysqli_stmt_get_result($stmt);
 
     if ($result_set == false) {
-        return false;
+        return true;
     } else {
         return $result_set;
     }
@@ -108,10 +108,10 @@ function userInsert($is_connected, $temp_firstName, $temp_last_Name, $temp_email
 
     if (!mysqli_stmt_prepare($stmt, "INSERT INTO users VALUES (?,?,?,?,?,?)")) {
         header("location: ../index.php?error=stmtfailed");
-        return;
+        exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "issssi", $GLOBALS['userCount'], $temp_firstName, $temp_last_Name, $temp_email, $temp_password, $temp_accountType);
+    mysqli_stmt_bind_param($stmt, "issssi", $GLOBALS['userCount'], $temp_firstName, $temp_last_Name, $temp_password,$temp_email, $temp_accountType);
 
     mysqli_stmt_execute($stmt);
 }
