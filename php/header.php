@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,7 +13,9 @@
             <nav>
                 <img src="media/epignosis.png" class="logo">
                 <ul class="nav-links">
-                    <li><a href="">Home</a></li>
+                    <?php 
+
+                    ?>
                     <li><a href="">Sign up</a></li>
                     <li><a href="">Login</a></li>
                     
