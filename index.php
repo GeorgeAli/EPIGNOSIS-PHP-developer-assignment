@@ -1,13 +1,11 @@
 <?php
-
-function hello(){
-
-    echo "Hello World!\n";
-
-}
+    
+include_once 'php/header.php';
 
 
-$txt = "PHP";
-echo "I love $txt!\n";
-hello();
+include_once 'php/signup.php'; 
+
+
+include_once 'php/footer.php';
+
 ?>
