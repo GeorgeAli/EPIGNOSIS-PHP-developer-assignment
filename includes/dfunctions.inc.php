@@ -111,8 +111,6 @@ function userInsert($is_connected, $temp_firstName, $temp_last_Name, $temp_email
         return;
     }
 
-    echo "hello\n";
-
     mysqli_stmt_bind_param($stmt, "issssi", $GLOBALS['userCount'], $temp_firstName, $temp_last_Name, $temp_email, $temp_password, $temp_accountType);
 
     mysqli_stmt_execute($stmt);
