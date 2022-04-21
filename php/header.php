@@ -1,4 +1,6 @@
-
+<?php
+    session_start();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,10 +17,20 @@
                 <ul class="nav-links">
                     <?php 
 
+                        if(isset($_SESSION["type"])){
+
+                            if($_SESSION["type"] == 0){
+                                echo "<li><a href='php/applications.php'>Applications</a></li>";
+                                echo "<li><a href='php/signup.php'>Signup</a></li>";
+                                echo "<li><a href='php/logout.php'>Logout</a></li>";
+                            }else{
+                                echo "<li><a href=\"\">Request</a></li>";
+                                echo "<li><a href='php/logout.php'>Logout</a></li>";
+                            }
+                        }
+                        
                     ?>
-                    <li><a href="">Sign up</a></li>
-                    <li><a href="">Login</a></li>
-                    
+                
                 </ul>
             </nav>
         </div>
