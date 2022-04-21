@@ -1,7 +1,7 @@
 <?php
 
 
-if (isset($_POST["submit"])) {
+if(isset($_POST["submit"])){
 
     $email = $_POST["email"];
     $pwd = $_POST["pwd"];
@@ -12,18 +12,25 @@ if (isset($_POST["submit"])) {
     $is_connected = connectDB();
     initDB($is_connected);
 
-    if (emptyInputLogin($email, $pwd) !== false) {
+    if(emptyInputLogin($email, $pwd) !== false){
         header("location: ../index.php?error=emptyinput");
         exit();
     }
 
-    if (userLoginCheck($is_connected, $email, $pwd) == false) {
-        header("location: ../index.php?error=wrongcredentials");
-        exit();
-    } else {
-        header("location: ../index.php");
+    $result_set = userLoginCheck($is_connected, $email, $pwd);
+
+    while ($row = mysqli_fetch_array($result_set, MYSQLI_ASSOC)) {
+        print_r($row);
     }
-} else {
+
+    if($result_set == false){
+        echo "lathow\n\n";
+    }else{
+        header("location: ../index.php");
+        exit();
+    }
+
+}else{
     header("location: ../index.php");
     exit();
 }
