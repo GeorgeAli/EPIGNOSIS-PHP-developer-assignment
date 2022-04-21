@@ -53,8 +53,6 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
-
-
     userInsert($is_connected, $firstname, $lastname, $email, $pwd, $usertype);
     header("location: ../index.php?error=none");
 } else {

@@ -28,7 +28,7 @@ function initDB($is_connected)
 
     try {
         // add table Users to db
-        $query = "CREATE TABLE users ( accountID INT(30) PRIMARY KEY AUTO_INCREMENT, firstname VARCHAR(30) NOT NULL, lastname VARCHAR(30) NOT NULL, password VARCHAR(30) NOT NULL, email VARCHAR(50) NOT NULL, acoount_type INT(30) NOT NULL )";
+        $query = "CREATE TABLE users ( accountID INT(30) AUTO_INCREMENT PRIMARY KEY, firstname VARCHAR(30) NOT NULL, lastname VARCHAR(30) NOT NULL, password VARCHAR(30) NOT NULL, email VARCHAR(50) NOT NULL, acoount_type INT(30) NOT NULL )";
         mysqli_query($is_connected, $query);
         $query = "INSERT INTO users VALUES ('admin', 'admin', 'admin', 'admin@epignosis.admin.com', 1);";
         $query .= "INSERT INTO users VALUES ('George', 'Alivertis', '123567', 'George@epignosis.com', 0);";
@@ -52,7 +52,7 @@ function userLoginCheck($is_connected, $temp_email, $temp_password)
 {
     $stmt = mysqli_stmt_init($is_connected);
 
-    if (!mysqli_stmt_prepare($stmt, "SELECT * FROM users WHERE email = ? and password = ?")) {
+    if (!mysqli_stmt_prepare($stmt, "SELECT * FROM users WHERE email = ? and password = ?;")) {
         header("location: ../index.php?error=stmtfailed");
         exit();
     }
@@ -101,7 +101,7 @@ function userInsert($is_connected, $temp_firstName, $temp_last_Name, $temp_email
 {
     $stmt = mysqli_stmt_init($is_connected);
 
-    $query = "INSERT INTO users (firstname, lastname, password, email, account_type) VALUES (?, ?, ?, ?, ?)";
+    $query = "INSERT INTO users (firstname, lastname, password, email, account_type) VALUES (?, ?, ?, ?, ?);";
 
     if (!mysqli_stmt_prepare($stmt, $query)) {
         header("location: ../index.php?error=stmtfailed");
