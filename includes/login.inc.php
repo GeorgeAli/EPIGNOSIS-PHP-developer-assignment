@@ -17,20 +17,22 @@ if(isset($_POST["submit"])){
         exit();
     }
 
-    $result_set = userLoginCheck($is_connected, $email, $pwd);
 
-    while ($row = mysqli_fetch_array($result_set, MYSQLI_ASSOC)) {
-        print_r($row);
-    }
-
-    if($result_set == false){
-        echo "lathow\n\n";
+    if(userLoginCheck($is_connected, $email, $pwd) == false){
+        echo "lathos\n\n";
     }else{
-        header("location: ../index.php");
+
+
+            if($_SESSION["type"] === "0"){
+                header("location: ../php/applications.php?");
+            }else{
+                header("location: ../index.php?ADMIN");
+            }
+
         exit();
     }
 
 }else{
-    header("location: ../index.php");
+    header("location: ../index.php?error=invalidAccess");
     exit();
 }

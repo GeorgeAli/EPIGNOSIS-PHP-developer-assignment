@@ -1,6 +1,5 @@
 <?php
-    
-include_once 'php/header.php';
+include_once 'header.php';
 ?>
 
 
@@ -17,12 +16,12 @@ include_once 'php/header.php';
 
     <?php 
 
-        require_once 'includes/functions.inc.php';
-        require_once 'includes/dfunctions.inc.php';
+        require_once '../includes/functions.inc.php';
+        require_once '../includes/dfunctions.inc.php';
 
 
-        if(isset($_SESSION["type"])){ //amfilegomeno shmeio
-            if($_SESSION["type"] == 0){
+        if(isset($_SESSION['type'])){
+            if($_SESSION["type"] == "0"){
                 if(isset($_SESSION["id"])){
                     //kapoia while
                     echo printRow("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Rejected");
@@ -34,13 +33,13 @@ include_once 'php/header.php';
                 }
             }
 
-        }
+        }else
+
 
     ?>
 
 </table>
 
 <?php
-include_once 'php/footer.php';
-
+include_once 'footer.php';
 ?>

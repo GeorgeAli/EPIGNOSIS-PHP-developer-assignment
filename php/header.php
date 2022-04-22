@@ -6,7 +6,7 @@
 <html lang="en">
     <head>
         <meta charset = "utf-8">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="../css/style.css">
         <title>PHP Developer Assignment</title>
     </head>
 
@@ -19,7 +19,7 @@
 
                         if(isset($_SESSION["type"])){
 
-                            if($_SESSION["type"] == 0){
+                            if($_SESSION["type"] === "0"){
                                 echo "<li><a href='php/applications.php'>Applications</a></li>";
                                 echo "<li><a href='php/signup.php'>Signup</a></li>";
                                 echo "<li><a href='include/logout.inc.php'>Logout</a></li>";

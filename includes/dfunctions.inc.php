@@ -31,19 +31,19 @@ function initDB($is_connected)
 
     try {
         // add table Users to db
-        $query = "CREATE TABLE users ( accountID INT(30) PRIMARY KEY, firstname VARCHAR(30) NOT NULL, lastname VARCHAR(30) NOT NULL, password VARCHAR(30) NOT NULL, email VARCHAR(50) NOT NULL, account_type INT(30) NOT NULL )";
+        $query = "CREATE TABLE users ( accountID INT(30) PRIMARY KEY, firstname VARCHAR(30) NOT NULL, lastname VARCHAR(30) NOT NULL, password VARCHAR(30) NOT NULL, email VARCHAR(50) NOT NULL, account_type VARCHAR(30) NOT NULL )";
         mysqli_query($is_connected, $query);
-        $query = "INSERT INTO users VALUES (0, 'admin', 'admin', 'admin', 'admin@epignosis.admin.com', 1);";
-        $query .= "INSERT INTO users VALUES (1, 'George', 'Alivertis', '123567', 'George@epignosis.com', 0);";
-        $query .= "INSERT INTO users VALUES (2, 'Panagiotis', 'Anastasiadis', 'Panagiotis', 'Panagiotis@epignosis.com', 0);";
-        $query .= "INSERT INTO users VALUES (3, 'Giannis', 'Tzortzakis', 'zsdvdaf', 'Giannis@epignosis.com', 0);";
-        $query .= "INSERT INTO users VALUES (4, 'Nikos', 'Stathakis', 'x123xaz', 'Nikos@epignosis.com', 0);";
-        $query .= "INSERT INTO users VALUES (5, 'Tasos', 'Karagianopoulos', 'v25cqW', 'Tasos@epignosis.com', 0);";
-        $query .= "INSERT INTO users VALUES (6, 'Marios', 'Alivertis' , '2V5# 24 5 ', 'Marios@epignosis.com', 0);";
-        $query .= "INSERT INTO users VALUES (7, 'Sofia', 'Gounari' ,':-)', 'Sofia@epignosis.com', 0);";
-        $query .= "INSERT INTO users VALUES (8, 'Maria', 'Gounari' ,'empty', 'Maria@epignosis.com', 0);";
-        $query .= "INSERT INTO users VALUES (9, 'Eleni', 'Andreou' ,'DROP DATABASE', 'Eleni@epignosis.com', 0);";
-        $query .= "INSERT INTO users VALUES (10, 'Euthimia', 'Panagiotopoulou','admin', 'Euthimia@epignosis.com', 0);";
+        $query = "INSERT INTO users VALUES (0, 'admin', 'admin', 'admin', 'admin@epignosis.admin.com', '1');";
+        $query .= "INSERT INTO users VALUES (1, 'George', 'Alivertis', '123567', 'George@epignosis.com', '0');";
+        $query .= "INSERT INTO users VALUES (2, 'Panagiotis', 'Anastasiadis', 'Panagiotis', 'Panagiotis@epignosis.com', '0');";
+        $query .= "INSERT INTO users VALUES (3, 'Giannis', 'Tzortzakis', 'zsdvdaf', 'Giannis@epignosis.com', '0');";
+        $query .= "INSERT INTO users VALUES (4, 'Nikos', 'Stathakis', 'x123xaz', 'Nikos@epignosis.com', '0');";
+        $query .= "INSERT INTO users VALUES (5, 'Tasos', 'Karagianopoulos', 'v25cqW', 'Tasos@epignosis.com', '0');";
+        $query .= "INSERT INTO users VALUES (6, 'Marios', 'Alivertis' , '2V5# 24 5 ', 'Marios@epignosis.com', '0');";
+        $query .= "INSERT INTO users VALUES (7, 'Sofia', 'Gounari' ,':-)', 'Sofia@epignosis.com', '0');";
+        $query .= "INSERT INTO users VALUES (8, 'Maria', 'Gounari' ,'empty', 'Maria@epignosis.com', '0');";
+        $query .= "INSERT INTO users VALUES (9, 'Eleni', 'Andreou' ,'DROP DATABASE', 'Eleni@epignosis.com', '0');";
+        $query .= "INSERT INTO users VALUES (10, 'Euthimia', 'Panagiotopoulou','admin', 'Euthimia@epignosis.com', '0');";
         mysqli_multi_query($is_connected, $query);
         $GLOBALS['current_users'] = 11;
     } catch (Exception $e) {
@@ -94,7 +94,7 @@ function userLoginCheck($is_connected, $temp_email, $temp_password)
 {
     $stmt = mysqli_stmt_init($is_connected);
 
-    if (!mysqli_stmt_prepare($stmt, "SELECT accountID, account_type FROM users WHERE email = ? and password = ?;")) {
+    if (!mysqli_stmt_prepare($stmt, "SELECT * FROM users WHERE email = ? and password = ?;")) {
         header("location: ../index.php?error=stmtfailed");
         exit();
     }
@@ -111,10 +111,15 @@ function userLoginCheck($is_connected, $temp_email, $temp_password)
         return false;
     } else {
         session_start();
-        $_SESSION["type"] = $results['account_type'];
-        $_SESSION["id"] = $results['accountID'];
+        $_SESSION['type'] = $results['account_type'];
+        $_SESSION['id'] = $results['accountID'];
+
         return $result_set;
+        
     }
+
+    mysqli_stmt_close($stmt);
+
 }
 
 function userSignUpCheck($is_connected, $temp_email)
