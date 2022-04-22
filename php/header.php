@@ -22,11 +22,11 @@
                             if($_SESSION["type"] == 0){
                                 echo "<li><a href='php/applications.php'>Applications</a></li>";
                                 echo "<li><a href='php/signup.php'>Signup</a></li>";
-                                echo "<li><a href='php/logout.php'>Logout</a></li>";
+                                echo "<li><a href='include/logout.inc.php'>Logout</a></li>";
                             }else{
                                 echo "<li><a href=\"\">Request</a></li>";
                                 echo "<li><a href='php/logout.php'>Logout</a></li>";
-                            }
+                            }           //prepei na ginei ena me USERS
                         }
                         
                     ?>
@@ -35,5 +35,8 @@
             </nav>
         </div>
 
+        <div id="container">
+            <div id="main">
 
-        <div class="wrapper">
+
+
