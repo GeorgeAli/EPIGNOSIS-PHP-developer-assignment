@@ -26,7 +26,7 @@
                             }else{
                                 echo "<li><a href=\"\">Request</a></li>";
                                 echo "<li><a href='php/logout.php'>Logout</a></li>";
-                            }           //prepei na ginei ena me USERS
+                            }           //prepei na ginei ena me USERS.
                         }
                         
                     ?>
