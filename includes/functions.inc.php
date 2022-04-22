@@ -38,7 +38,7 @@ function invalidLastName($lastname){
 
 
 function invalidEmail($email){
-
+    
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $result = true;
     }else{
@@ -70,4 +70,43 @@ function weakPassword($pwd){
     }
 
     return $result;
+}
+
+
+function emptyInputLogin($email, $pwd){
+
+    if(empty($email) || empty($pwd)){
+        $result = true;
+    }else{
+        $result = false;
+    }
+
+    return $result;
+}
+
+function printElement($element, $color = "white"){
+    
+    $str = "<td bgcolor=$color style=\"text-align: center\">$element</td>";
+
+    return $str;
+}
+
+function printRow($date_sub, $dates_req, $days_req, $status){
+
+    $row = "<tr>".printElement($date_sub).printElement($dates_req).printElement($days_req);
+
+    if(strcmp($status, "Pending") == 0){
+        $row .= printElement($status, "yellow");
+    }
+    else if(strcmp($status, "Approved") == 0){
+        $row .= printElement($status, "#6fec73");
+    }
+    else if(strcmp($status, "Rejected") == 0){
+        $row .= printElement($status, "#f64444");
+    }
+    else{
+        $row = "error";
+    }
+
+    return $row;
 }

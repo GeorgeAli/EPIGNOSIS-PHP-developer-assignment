@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -11,13 +15,28 @@
             <nav>
                 <img src="media/epignosis.png" class="logo">
                 <ul class="nav-links">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Sign up</a></li>
-                    <li><a href="">Login</a></li>
-                    
+                    <?php 
+
+                        if(isset($_SESSION["type"])){
+
+                            if($_SESSION["type"] == 0){
+                                echo "<li><a href='php/applications.php'>Applications</a></li>";
+                                echo "<li><a href='php/signup.php'>Signup</a></li>";
+                                echo "<li><a href='include/logout.inc.php'>Logout</a></li>";
+                            }else{
+                                echo "<li><a href=\"\">Request</a></li>";
+                                echo "<li><a href='php/logout.php'>Logout</a></li>";
+                            }           //prepei na ginei ena me USERS
+                        }
+                        
+                    ?>
+                
                 </ul>
             </nav>
         </div>
 
+        <div id="container">
+            <div id="main">
 
-        <div class="wrapper">
+
+

@@ -1,10 +1,14 @@
 
+
+        </div>
     </div>
-    </body>
-    <footer>
-        <p>
-            Kati
-        </p>
-    </footer>
+
+</body>
+
+
+<footer id="footer">
+
+</footer>
+
 
 </html>
