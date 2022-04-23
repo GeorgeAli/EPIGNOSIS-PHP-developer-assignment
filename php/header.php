@@ -20,8 +20,7 @@
                         if(isset($_SESSION["type"])){
 
                             if($_SESSION["type"] === "1"){
-                                echo "<li><a href=''>Requests</a></li>";
-                                echo "<li><a href='../php/signup.php'>Signup</a></li>";
+                                echo "<li><a href='../php/users.php'>Employees</a></li>";
                                 echo "<li><a href='../includes/logout.inc.php'>Logout</a></li>";
                             }else{
                                 echo "<li><a href='../php/applications.php'>Your applications</a></li>";

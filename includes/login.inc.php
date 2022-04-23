@@ -25,7 +25,7 @@ if(isset($_POST["submit"])){
             if($_SESSION["type"] === "0"){
                 header("location: ../php/applications.php?");
             }else{
-                header("location: ../php/signup.php");
+                header("location: ../php/users.php");
             }
 
         exit();

@@ -4,8 +4,17 @@ include_once 'header.php';
 
 
 <h2 style="text-align: center;">Your Applications</h2>
+    
+    <form action="app_submit.php" method="post">
+        <button type="submit" name="app_submit">Submit a Request</button>
+    </form>
 
-<table border="1" cellspacing = "4" id="table_of_applications">
+
+
+
+
+
+<table border="1" cellspacing = "8" id="table_of_applications">
     <caption>Your applications</caption>
     <tr>
         <th>Date Submitted</th>
@@ -24,16 +33,17 @@ include_once 'header.php';
             if($_SESSION["type"] == "0"){
                 if(isset($_SESSION["id"])){
                     //kapoia while
-                    echo printRow("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Rejected");
-                    echo printRow("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Rejected");
-                    echo printRow("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Approved");
-                    echo printRow("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Rejected");
-                    echo printRow("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Pending");
+
+                    echo printRowApp("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Rejected");
+                    echo printRowApp("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Rejected");
+                    echo printRowApp("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Approved");
+                    echo printRowApp("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Rejected");
+                    echo printRowApp("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Pending");
                     
                 }
             }
 
-        }else
+        }
 
 
     ?>
