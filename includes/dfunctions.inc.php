@@ -150,10 +150,6 @@ function userInsert($is_connected, $temp_firstName, $temp_last_Name, $temp_email
 
     $temp_account = intval($temp_accountType);
 
-    $query = "INSERT INTO users VALUES ($current_users, '$temp_firstName', '$temp_last_Name','$temp_password', '$temp_email', $temp_account);";
-    mysqli_query($is_connected, $query);
-
-
     $query = "INSERT INTO  users (accountID, firstname, lastname, password, email, account_type) VALUES (?, ?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($is_connected);
 
