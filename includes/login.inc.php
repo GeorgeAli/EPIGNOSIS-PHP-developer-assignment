@@ -12,13 +12,13 @@ if(isset($_POST["submit"])){
     initDB();
 
     if(emptyInputLogin($email, $pwd) !== false){
-        header("location: ../php/login.php?error=emptyinput");
+        header("location: ../index.php?error=emptyinput");
         exit();
     }
 
 
     if(userLoginCheck($email, $pwd) == false){
-        header("location: ../php/login.php?error=noUserFound");
+        header("location: ../index.php?error=IncorrectInputs");
     }else{
 
 
