@@ -9,8 +9,7 @@ if(isset($_POST["submit"])){
     require_once 'functions.inc.php';
     require_once 'dfunctions.inc.php';
 
-    $is_connected = connectDB();
-    initDB($is_connected);
+    initDB();
 
     if(emptyInputLogin($email, $pwd) !== false){
         header("location: ../index.php?error=emptyinput");
@@ -18,9 +17,8 @@ if(isset($_POST["submit"])){
     }
 
 
-    if(userLoginCheck($is_connected, $email, $pwd) == false){
-        header("location: ../php/login.php");
-        echo "Something went wrong!\n";
+    if(userLoginCheck($email, $pwd) == false){
+        header("location: ../index.php?error=noUserFound");
     }else{
 
 

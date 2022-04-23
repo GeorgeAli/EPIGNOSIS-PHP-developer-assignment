@@ -10,11 +10,44 @@ include_once 'header.php';
     </form>
 
 
+<table class="table">
+    <thead>
+        <tr>
+        <th scope="col">Date Submitted</th>
+        <th scope="col">Dates Requested</th>
+        <th scope="col">Days Requested</th>
+        <th scope="col">Status</th>
+        <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <?php 
+            require_once '../includes/functions.inc.php';
+            require_once '../includes/dfunctions.inc.php';
+        
+            if(isset($_SESSION['type'])){
+                if($_SESSION["type"] == "0"){
+                    if(isset($_SESSION["id"])){
+
+                        
+                        echo printRowApp("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Rejected");   
+                        echo printRowApp("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Rejected");   
+                        echo printRowApp("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Rejected");                   
+                     }
+                }
+            }
+            
+        ?>
+
+    </tbody>
+</table>
 
 
+<!----
 
 
-<table border="1" cellspacing = "8" id="table_of_applications">
+<table border="1" cellspacing = "8" id="table_of_applications" style="    margin-left: auto; margin-right: auto;" >
     <caption>Your applications</caption>
     <tr>
         <th>Date Submitted</th>
@@ -24,7 +57,7 @@ include_once 'header.php';
     </tr>
 
     <?php 
-
+/*
         require_once '../includes/functions.inc.php';
         require_once '../includes/dfunctions.inc.php';
 
@@ -45,10 +78,12 @@ include_once 'header.php';
 
         }
 
-
+*/
     ?>
 
 </table>
+
+--->
 
 <?php
 include_once 'footer.php';

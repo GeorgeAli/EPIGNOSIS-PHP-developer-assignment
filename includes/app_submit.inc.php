@@ -20,7 +20,7 @@ if(isset($_POST['submit_app'])){
     $startDate = date("d-m-Y", strtotime($startDate));
     $endDate = date("d-m-Y", strtotime($endDate));
     
-    if($days < 0){
+    if($days_requested < 0){
         header("location: ../php/app_submit.php?error=incorrectDates");
         exit();
     }
