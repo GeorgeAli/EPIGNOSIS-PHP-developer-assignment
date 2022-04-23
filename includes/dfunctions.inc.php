@@ -140,14 +140,15 @@ function userSignUpCheck($is_connected, $temp_email)
 
     //$result_set = mysqli_stmt_get_result($stmt);
 
-    if ($result_set == false) {
-        return true;
+    if ($result_set == false || mysqli_num_rows($result_set) == 0) {
+        return false;
     } else {
         return $result_set;
     }
 }
 
 // Inserts a new User / admin inside the DB. Checks if he/she exists first
+
 function userInsert($is_connected, $temp_firstName, $temp_last_Name, $temp_email, $temp_password, $temp_accountType)
 {
     $current_users = intval($GLOBALS['current_users']);
