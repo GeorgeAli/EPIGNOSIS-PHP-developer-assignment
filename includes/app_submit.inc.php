@@ -14,7 +14,7 @@ if (isset($_POST['submit_app'])) {
     require_once 'dfunctions.inc.php';
     require_once 'functions.inc.php';
 
-    if (isValid($reason)) {
+    if (!isValid($reason)) {
         header("location: ../php/app_submit.php?error=invalidCharacters");
         exit();
     }

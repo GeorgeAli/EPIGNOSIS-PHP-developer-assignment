@@ -38,7 +38,7 @@ function invalidLastName($lastname){
 
 
 function invalidEmail($email){
-    
+
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $result = true;
     }else{
@@ -85,7 +85,7 @@ function emptyInputLogin($email, $pwd){
 }
 
 function printElement($element, $color = "white"){
-    
+
     $str = "<td bgcolor=$color>$element</td>";
 
     return $str;
@@ -112,7 +112,7 @@ function printRowApp($date_sub, $dates_req, $days_req, $status){
 }
 
 function printRowUsers($firstname, $lastname, $email, $type){
-    
+
     $row = "<tr><th class=\"font-weight-normal\">$firstname</th>";
 
     $row .= printElement($lastname).printElement($email).printElement($type);

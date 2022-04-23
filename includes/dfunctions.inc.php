@@ -222,7 +222,7 @@ function applicationInsert($temp_accountID, $temp_dateFrom, $temp_dateTo, $temp_
 
     $temp_status = "Pending";
 
-    $temp_submitDate = date("Y/m/d");
+    $temp_submitDate = date("Y-m-d");
 
     $current_applications = mysqli_num_rows(mysqli_query($is_connected, "SELECT * FROM applications;"));
 
