@@ -14,12 +14,6 @@ if (isset($_POST['submit_app'])) {
     require_once 'dfunctions.inc.php';
     require_once 'functions.inc.php';
 
-    if ($days < 0) {
-        header("location: ../php/app_submit.php?error=incorrectDates");
-        exit();
-    }
-
-
     if (isValid($reason)) {
         header("location: ../php/app_submit.php?error=invalidCharacters");
         exit();
@@ -27,6 +21,15 @@ if (isset($_POST['submit_app'])) {
 
     session_start();
     if (isset($_SESSION["id"])) {
+        $dateFrom = new DateTime($startDate);
+        $dateTo = new DateTime($endDate);
+        $days_requested = $dateFrom->diff($dateTo);
+        $days_requested = $days_requested->format('%R%a days');
+
+        if (intval($days_requested) < 0) {
+            header("location: ../php/app_submit.php?error=incorrectDates");
+            exit();
+        }
         applicationInsert($_SESSION["id"], $startDate, $endDate, $reason);
         header("location: ../php/applications.php?applicationSubmitted");
         echo "Your application is submitted";

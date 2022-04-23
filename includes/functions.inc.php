@@ -38,7 +38,7 @@ function invalidLastName($lastname){
 
 
 function invalidEmail($email){
-
+    
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $result = true;
     }else{
@@ -85,8 +85,8 @@ function emptyInputLogin($email, $pwd){
 }
 
 function printElement($element, $color = "white"){
-
-    $str = "<td bgcolor=$color style=\"text-align: center\">$element</td>";
+    
+    $str = "<td bgcolor=$color>$element</td>";
 
     return $str;
 }
@@ -112,20 +112,15 @@ function printRowApp($date_sub, $dates_req, $days_req, $status){
 }
 
 function printRowUsers($firstname, $lastname, $email, $type){
-    $row = "<tr>".printElement($firstname).printElement($lastname).printElement($email).printElement($type);
+    
+    $row = "<tr><th class=\"font-weight-normal\">$firstname</th>";
 
-    $row .= "<tr><input type='submit' value='Edit'></tr>";
+    $row .= printElement($lastname).printElement($email).printElement($type);
+
+    $row .= "<td><button class=\"btn btn-primary\">Edit</button></td>";
+
+    $row .= "</tr>";
 
     return $row;
 
-}
-
-
-function checkDates($startDate, $endDate){
-
-    $diff = strtotime($endDate) - strtotime($startDate);
-
-    $diff = round($diff/86400);
-
-    return $diff;
 }

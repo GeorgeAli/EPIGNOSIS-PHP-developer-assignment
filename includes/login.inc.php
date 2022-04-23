@@ -12,18 +12,18 @@ if(isset($_POST["submit"])){
     initDB();
 
     if(emptyInputLogin($email, $pwd) !== false){
-        header("location: ../index.php?error=emptyinput");
+        header("location: ../php/login.php?error=emptyinput");
         exit();
     }
 
 
     if(userLoginCheck($email, $pwd) == false){
-        header("location: ../index.php?error=noUserFound");
+        header("location: ../php/login.php?error=noUserFound");
     }else{
 
 
             if($_SESSION["type"] === "0"){
-                header("location: ../php/applications.php?");
+                header("location: ../php/applications.php");
             }else{
                 header("location: ../php/users.php");
             }
