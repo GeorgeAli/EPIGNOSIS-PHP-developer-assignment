@@ -117,10 +117,6 @@ function printRowUsers($firstname, $lastname, $email, $type){
 
     $row .= printElement($lastname).printElement($email).printElement($type);
 
-    $row .= "<td><button class=\"btn btn-primary\">Edit</button></td>";
-
-    $row .= "</tr>";
-
     return $row;
 
 }

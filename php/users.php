@@ -4,6 +4,14 @@ include_once 'header.php';
 
 <h2 style="text-align: center;">The Employees</h2>
 
+    <?php 
+        if (isset($_GET["error"])) {
+            if ($_GET["error"] == "useralreadyexists") {
+                echo "<p>There is a user with this email!</p>";
+            }
+        }
+    ?>
+
 <form action="signup.php" method="post">
     <button type="submit" name="singup">Create a User</button>
 </form>
@@ -21,6 +29,7 @@ include_once 'header.php';
     </thead>
     <tbody>
 
+    <form action="signup.php" method="post">
     <?php
         require_once '../includes/functions.inc.php';
         require_once '../includes/dfunctions.inc.php';
@@ -42,15 +51,17 @@ include_once 'header.php';
                             } else if (intval($temp_user['account_type']) == 1) {
                                 $type = "Admin";
                             }
+                            $tempId = $temp_user['accountID'];
 
-                            echo printRowUsers($temp_user['firstname'], $temp_user['lastname'], $temp_user['email'], $type);
+                            echo printRowUsers($temp_user['firstname'], $temp_user['lastname'], $temp_user['email'], $type)."<td><button type='submit' name='$tempId' class=\"btn btn-primary\">Edit</button></td></tr>";
                         }
                     }
                 }
             }
         }
 
-?>
+    ?>
+    </form>
 
     </tbody>
 </table>

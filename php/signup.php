@@ -4,19 +4,58 @@ include_once 'header.php';
 
     <h2>Sign Up</h2>
 
-
     <form action="../includes/signup.inc.php" method="post">
     <div class="form-group w-50 p-3">
             <label for="first_name">First Name</label>
-            <input type="text" name="firstname" class="form-control" id="exampleFormControlInput1" placeholder="First Name...">
+                <?php 
+
+                    require_once '../includes/dfunctions.inc.php';
+                    $is_connected = connectDB();
+
+                    $current_users = mysqli_num_rows(mysqli_query($is_connected, "SELECT * FROM users;"));
+                    $accid = -1;
+                    
+                    for ($i=0; $i < $current_users; $i++) { 
+                        if(isset($_POST["$i"])){
+                            $accid=$i;
+                        }
+                    }
+                    
+                    
+                    if($accid !== -1){
+                        $user = getUser($_SESSION["id"]);
+                        if ($user == false || mysqli_num_rows($user) == 0) {
+                           
+                        } else {
+                            while ($temp_user = mysqli_fetch_assoc($user)) {
+                                $fname = $temp_user['firstname'];
+                                $lname = $temp_user['lastname'];
+                                $mail = $temp_user['email'];
+                                $tp = $temp_user['account_type'];
+                                $bt = "Update";
+                            }
+                        }
+                        
+                    }else{
+                        $fname = "";
+                        $lname = "";
+                        $mail = "";
+                        $tp = 0;
+                        $bt = "Create";
+                    }
+                    
+
+                    echo "<input type=\"text\" name=\"firstname\" class=\"form-control\" value='$fname' id=\"exampleFormControlInput1\" placeholder=\"First Name...\">";
+                ?>
         </div>
         <div class="form-group w-50 p-3">
             <label for="last_name">Last Name</label>
-            <input type="text" name="lastname" class="form-control" id="exampleFormControlInput1" placeholder="Last Name...">
+            <?php echo "<input type=\"text\" name=\"lastname\" class=\"form-control\" value='$lname' id=\"exampleFormControlInput1\" placeholder=\"Last Name...\">"; ?>
         </div>
         <div class="form-group w-50 p-3">
             <label for="email">Email</label>
-            <input type="text" name="email" class="form-control" id="exampleFormControlInput1" placeholder="Email">
+            <?php echo "<input type=\"text\" name=\"email\" class=\"form-control\" value='$mail' id=\"exampleFormControlInput1\" placeholder=\"Email\">";?>
+            
         </div>
         <div class="form-group w-50 p-3">
             <label for="password">Password</label>
@@ -30,37 +69,21 @@ include_once 'header.php';
         <div class="form-group w-50 p-3">
             <label for="exampleFormControlSelect1">Type of User</label>
             <select name="usertype" class="form-control" id="exampleFormControlSelect1">
-            <option value=0>Employee</option>
-            <option value=1>Admin</option>
+
+                <?php 
+                    if($tp == 0){
+                        echo "<option value=0>Employee</option><option value=1>Admin</option>";
+                    }else{
+                        echo "<option value=1>Admin</option><option value=0>Employee</option>";
+                    }
+                ?>
+
             </select>
         </div>
-        <button type="submit" name="submit" class="btn btn-primary">Create</button>
+        <?php echo "<button type=\"submit\" name=\"submit\" class=\"btn btn-primary\">$bt</button>";?>
+        
     </form>
     
-    
-    
-    <!----
-    <div class="form-group">
-        <label for="exampleFormControlTextarea1">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-    </div>
-    
-    <form action="../includes/signup.inc.php" method="post">
-        <input type="text" name="firstname" placeholder="First name...">
-        <input type="text" name="lastname" placeholder="Last name...">
-        <input type="text" name="email" placeholder="Email...">
-        <input type="password" name="pwd" placeholder="Password...">
-        <input type="password" name="pwdconfirm" placeholder="Confirm password...">
-        <select name="usertype" id="usertype">
-            <option value=0>Employee</option>
-            <option value=1>Admin</option>  
-        </select>
-        <button type="submit" name="submit">Create</button>
-    </form>
-    
-
----->
-
 
     <?php
 

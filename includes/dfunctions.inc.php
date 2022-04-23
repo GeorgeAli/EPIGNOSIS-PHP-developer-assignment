@@ -155,6 +155,9 @@ function userLoginCheck($temp_email, $temp_password)
         session_start();
         $_SESSION['type'] = $results['account_type'];
         $_SESSION['id'] = $results['accountID'];
+        $_SESSION['email'] = $results['email'];
+        $_SESSION['firstname'] = $results['firstname'];
+        $_SESSION['lastname'] = $results['lastname'];
 
         return $result_set;
     }

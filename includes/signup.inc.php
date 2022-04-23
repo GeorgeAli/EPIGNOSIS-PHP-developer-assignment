@@ -43,18 +43,17 @@ if (isset($_POST['submit'])) {
     }
 
     if (userSignUpCheck($email) !== false) {
-        header("location: ../index.php?error=useralreadyexists");
+        header("location: ../php/users.php?error=useralreadyexists");
         exit();
     }
 
     if (weakPassword($pwd) !== false) {
-        header("location: ../php/signup.php?error=weakpassword");
+        header("location: ../php/users.php?error=weakpassword");
         exit();
     } else {
         userInsert($firstname, $lastname, $email, $pwd, $usertype);
 
-        header("location: ../php/signup.php?userSignedUp");
-        echo "New User Signed Up!\n";
+        header("location: ../php/users.php?userSignedUp");
     }
 } else {
     header("location: ../php/signup.php?signUpFailed");
