@@ -4,9 +4,6 @@ include_once 'header.php';
 
 
 <h2 style="text-align: center;">Your Applications</h2>
-    
-    <button href="app_submit.php">Submit a Request</button>
-
 
 <table border="1" cellspacing = "4" id="table_of_applications">
     <caption>Your applications</caption>

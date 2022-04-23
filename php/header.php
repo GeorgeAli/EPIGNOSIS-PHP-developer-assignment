@@ -13,9 +13,9 @@
     <body>
         <div class="head">
             <nav>
-                <img src="media/epignosis.png" class="logo">
+                <img src="../media/epignosis.png" class="logo">
                 <ul class="nav-links">
-                    <?php 
+                    <?php
 
                         if(isset($_SESSION["type"])){
 
@@ -28,9 +28,9 @@
                                 echo "<li><a href='../includes/logout.inc.php'>Logout</a></li>";
                             }           //prepei na ginei ena me USERS.
                         }
-                        
+
                     ?>
-                
+
                 </ul>
             </nav>
         </div>

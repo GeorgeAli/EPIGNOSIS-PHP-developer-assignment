@@ -15,8 +15,7 @@ if (isset($_POST['submit'])) {
     require_once 'dfunctions.inc.php';
     require_once 'functions.inc.php';
 
-    $is_connected = connectDB();
-
+    initDB();
 
     if (emptyInputSignup($firstname, $lastname, $email, $pwd, $pwdRepeat) !== false) {
         header("location: ../php/signup.php?error=emptyinput");
@@ -43,20 +42,20 @@ if (isset($_POST['submit'])) {
         exit();
     }
 
-  //  if (userSignUpCheck($is_connected, $email) !== false) {
- //       header("location: ../index.php?error=useralreadyexists");
- //       exit();
-//    }
-
-    if(weakPassword($pwd) !== false){
-          header("location: ../php/signup.php?error=weakpassword");
-          exit();
+    if (userSignUpCheck($email) !== false) {
+        header("location: ../index.php?error=useralreadyexists");
+        exit();
     }
 
-    userInsert($is_connected, $firstname, $lastname, $email, $pwd, $usertype);
-    header("location: ../php/signup.php?userSignedUp");
-    echo "New User Signed Up!\n";
-    mysqli_close($is_connected);
+    if (weakPassword($pwd) !== false) {
+        header("location: ../php/signup.php?error=weakpassword");
+        exit();
+    } else {
+        userInsert($firstname, $lastname, $email, $pwd, $usertype);
+
+        header("location: ../php/signup.php?userSignedUp");
+        echo "New User Signed Up!\n";
+    }
 } else {
     header("location: ../php/signup.php?signUpFailed");
     exit();
