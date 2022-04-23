@@ -19,11 +19,13 @@ include_once 'header.php';
         <input type="date" id="start_date" name="end_date" value="2022-04-23" min="2022-04-23" max="2024-04-23">
         
         <br>
-        <label for="reason">Reason:</label>
-        <br>
-        <textarea id="textarea_reason" name="textarea_reason" rows="5" cols="55" placeholder="(vacation)"></textarea>
 
-        <button type="submit" name="submit_app">Create</button>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Reason:</label>
+            <textarea name="textarea_reason" class="form-control" id="textarea_reason" rows="3" placeholder="(vacation)"></textarea>
+        </div>
+
+        <button type="submit" name="submit_app" class="btn btn-primary">Submit</button>
 
     </form>
 
