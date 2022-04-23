@@ -19,14 +19,15 @@ if(isset($_POST["submit"])){
 
 
     if(userLoginCheck($is_connected, $email, $pwd) == false){
-        echo "lathos\n\n";
+        header("location: ../php/login.php");
+        echo "Something went wrong!\n";
     }else{
 
 
             if($_SESSION["type"] === "0"){
                 header("location: ../php/applications.php?");
             }else{
-                header("location: ../index.php?ADMIN");
+                header("location: ../php/signup.php");
             }
 
         exit();
