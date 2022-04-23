@@ -1,7 +1,6 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: "poppins";
     box-sizing: border-box;
 }
 
@@ -12,7 +11,8 @@
     position: relative;
 }
 
-html, body{
+
+html{
     height: 100%;
     background-color: #fff;
     color: black;
@@ -70,6 +70,7 @@ nav{
     margin-left: auto;
     margin-right: auto;
 }
+
 
 
 

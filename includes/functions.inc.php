@@ -91,7 +91,7 @@ function printElement($element, $color = "white"){
     return $str;
 }
 
-function printRow($date_sub, $dates_req, $days_req, $status){
+function printRowApp($date_sub, $dates_req, $days_req, $status){
 
     $row = "<tr>".printElement($date_sub).printElement($dates_req).printElement($days_req);
 
@@ -108,5 +108,24 @@ function printRow($date_sub, $dates_req, $days_req, $status){
         $row = "error";
     }
 
+    return $row."</tr>";
+}
+
+function printRowUsers($firstname, $lastname, $email, $type){
+    $row = "<tr>".printElement($firstname).printElement($lastname).printElement($email).printElement($type);
+
+    $row .= "<tr><input type='submit' value='Edit'></tr>";
+
     return $row;
+
+}
+
+
+function checkDates($startDate, $endDate){
+
+    $diff = strtotime($endDate) - strtotime($startDate);
+    
+    $diff = round($diff/86400);
+
+    return $diff;
 }

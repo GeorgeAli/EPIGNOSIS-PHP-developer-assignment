@@ -11,7 +11,7 @@
         <input type="password" name="pwd" placeholder="Password...">
         <input type="password" name="pwdconfirm" placeholder="Confirm password...">
         <select name="usertype" id="usertype">
-            <option value=0>User</option>
+            <option value=0>Employee</option>
             <option value=1>Admin</option>  
         </select>
         <button type="submit" name="submit">Create</button>
@@ -42,6 +42,7 @@
             }
 
         }
+
     ?>
 
     </section>
