@@ -77,7 +77,8 @@ function getApplications($is_connected, $accountID)
     return mysqli_query($is_connected, "SELECT * FROM requests where accountID = $accountID ORDER BY submitDay DESC;");
 }
 
-function printApplications($is_connected, $accountID){
+function printApplications($is_connected, $accountID)
+{
 
     $application = getApplications($is_connected, $accountID);
 
@@ -115,30 +116,25 @@ function userLoginCheck($is_connected, $temp_email, $temp_password)
         $_SESSION['id'] = $results['accountID'];
 
         return $result_set;
-        
     }
 
     mysqli_stmt_close($stmt);
-
 }
 
 function userSignUpCheck($is_connected, $temp_email)
 {
-    //$stmt = mysqli_stmt_init($is_connected);
+    $stmt = mysqli_stmt_init($is_connected);
 
-    //if (!mysqli_stmt_prepare($stmt, "SELECT * FROM users WHERE email = ?;")) {
-    //    header("location: ../index.php?error=stmtfailedsignup$temp_email");
-    //    exit();
-    //}
+    if (!mysqli_stmt_prepare($stmt, "SELECT * FROM users WHERE email = ?;")) {
+        header("location: ../index.php?error=stmtfailedsignup");
+        exit();
+    }
 
-    $query = "SELECT * FROM users WHERE email = '$temp_email';";
-    $result_set = mysqli_query($is_connected, $query);
+    mysqli_stmt_bind_param($stmt, "s", $temp_email);
 
-    //mysqli_stmt_bind_param($stmt, "s", $temp_email);
+    mysqli_stmt_execute($stmt);
 
-    //mysqli_stmt_execute($stmt);
-
-    //$result_set = mysqli_stmt_get_result($stmt);
+    $result_set = mysqli_stmt_get_result($stmt);
 
     if ($result_set == false) {
         return true;
@@ -156,6 +152,21 @@ function userInsert($is_connected, $temp_firstName, $temp_last_Name, $temp_email
 
     $query = "INSERT INTO users VALUES ($current_users, '$temp_firstName', '$temp_last_Name','$temp_password', '$temp_email', $temp_account);";
     mysqli_query($is_connected, $query);
+
+
+    $query = "INSERT INTO  users (accountID, firstname, lastname, password, email, account_type) VALUES (?, ?, ?, ?, ?, ?);";
+    $stmt = mysqli_stmt_init($is_connected);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../index.php?error=stmtfailedInsert");
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "sssss", $current_users, $temp_firstName, $temp_last_Name, $temp_password, $temp_email, $temp_account);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+
     $GLOBALS['current_users'] = $GLOBALS['current_users'] + 1;
 }
 
