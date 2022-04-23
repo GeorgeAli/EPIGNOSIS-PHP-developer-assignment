@@ -124,13 +124,3 @@ function printRowUsers($firstname, $lastname, $email, $type){
     return $row;
 
 }
-
-
-function checkDates($startDate, $endDate){
-
-    $diff = strtotime($endDate) - strtotime($startDate);
-    
-    $diff = round($diff/86400);
-
-    return $diff;
-}

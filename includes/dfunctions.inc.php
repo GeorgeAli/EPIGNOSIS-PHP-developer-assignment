@@ -37,17 +37,17 @@ function initApplications()
         // add table applications to db
         $query = "CREATE TABLE applications ( applicationID INT(30) PRIMARY KEY, accountID INT(30), submitDay VARCHAR(30) NOT NULL, dateFrom VARCHAR(30) NOT NULL, dateTo VARCHAR(30) NOT NULL, reason VARCHAR(500) NOT NULL, status VARCHAR(30) NOT NULL)";
         mysqli_query($is_connected, $query);
-        $query = "INSERT INTO applications VALUES  (0, 1, '22/04/2022', '05/06/2022', '25/06/2022', 'I want to take a trip to Ohio', 'Pending');";
-        $query .= "INSERT INTO applications VALUES (1, 1, '17/06/2021', '17/07/2021', '27/07/2021', 'I will be moving into a new house and need time to do it', 'Accepted');";
-        $query .= "INSERT INTO applications VALUES (2, 1, '13/12/2020', '24/12/2020', '04/01/2021', 'Christmas vacation', 'Accepted');";
-        $query .= "INSERT INTO applications VALUES (3, 1, '28/09/2020', '29/09/2020', '03/10/2020', 'Need some time of because my mother died', 'Rejected');";
-        $query .= "INSERT INTO applications VALUES (4, 1, '26/07/2020', '06/08/2020', '08/08/2020', 'I need to take some time off for my birthday party', 'Rejected');";
-        $query .= "INSERT INTO applications VALUES (5, 3, '24/07/2020', '27/07/2020', '07/08/2020', 'I want to go to Moscow, need some free time. Thanks!', 'Accepted');";
-        $query .= "INSERT INTO applications VALUES (6, 3, '05/01/2020', '16/01/2020', '17/01/2020', 'I am getting married and will need the day off', 'Accepted');";
-        $query .= "INSERT INTO applications VALUES (7, 2, '01/01/2020', '05/01/2020', '09/01/2020', 'I need extra christmas holidays', 'Rejected');";
-        $query .= "INSERT INTO applications VALUES (8, 2, '20/12/2018', '05/01/2019', '09/01/2019', 'I need extra christmas holidays', 'Accepted');";
-        $query .= "INSERT INTO applications VALUES (9, 2, '05/06/2018', '16/06/2018', '29/08/2018', 'Oops sent the same application twice, sorry!!', 'Rejected');";
-        $query .= "INSERT INTO applications VALUES (10, 2, '05/06/2018', '16/06/2018', '29/08/2018', 'Summer Vacation requested', 'Accepted');";
+        $query = "INSERT INTO applications VALUES  (0, 1, '2022-04-22', '2022-06-05', '2022-06-25', 'I want to take a trip to Ohio', 'Pending');";
+        $query .= "INSERT INTO applications VALUES (1, 1, '2021-06-17', '2021-07-17', '2021-07-27', 'I will be moving into a new house and need time to do it', 'Approved');";
+        $query .= "INSERT INTO applications VALUES (2, 1, '2020-12-13', '2020-12-24', '2021-01-04', 'Christmas vacation', 'Approved');";
+        $query .= "INSERT INTO applications VALUES (3, 1, '2020-09-28', '2020-09-29', '2020-10-03', 'Need some time of because my mother died', 'Rejected');";
+        $query .= "INSERT INTO applications VALUES (4, 1, '2020-07-26', '2020-08-06', '2020-08-08', 'I need to take some time off for my birthday party', 'Rejected');";
+        $query .= "INSERT INTO applications VALUES (5, 3, '2020-07-24', '2020-07-27', '2020-08-07', 'I want to go to Moscow, need some free time. Thanks!', 'Approved');";
+        $query .= "INSERT INTO applications VALUES (6, 3, '2020-01-05', '2020-01-16', '2020-01-17', 'I am getting married and will need the day off', 'Approved');";
+        $query .= "INSERT INTO applications VALUES (7, 2, '2020-01-01', '2020-01-05', '2020-01-09', 'I need extra christmas holidays', 'Rejected');";
+        $query .= "INSERT INTO applications VALUES (8, 2, '2018-12-20', '2019-01-05', '2019-01-09', 'I need extra christmas holidays', 'Approved');";
+        $query .= "INSERT INTO applications VALUES (9, 2, '2018-06-05', '2018-06-16', '2018-08-29', 'Oops sent the same application twice, sorry!!', 'Rejected');";
+        $query .= "INSERT INTO applications VALUES (10, 2, '2018-06-05', '2018-06-16', '2018-08-29', 'Summer Vacation requested', 'Approved');";
         mysqli_multi_query($is_connected, $query);
     } catch (Exception $e) {
     }
@@ -94,43 +94,11 @@ function getUser($accountID)
 {
     $is_connected = connectDB();
 
-    $temp_accountID = intval($accountID);
+    $accountID = intval($accountID);
 
-    return mysqli_query($is_connected, "SELECT * FROM users where accountID = $temp_accountID;");
+    return mysqli_query($is_connected, "SELECT * FROM users where accountID <> $accountID;");
 
     mysqli_close($is_connected);
-}
-
-function printApplications($accountID)
-{
-    $application = getApplications($accountID);
-
-    if ($application == false || mysqli_num_rows($application) == 0) {
-        return false;
-    } else {
-        while ($temp_application = mysqli_fetch_assoc($application)) {
-            $submitDay = $temp_application['submitDay'];
-            $dateFrom = $temp_application['dateFrom'];
-            $dateTo = $temp_application['dateTo'];
-            $status = $temp_application['status'];
-        }
-    }
-}
-
-function printUser($accountID)
-{
-    $user = getUser($accountID);
-
-    if ($user == false || mysqli_num_rows($user) == 0) {
-        return false;
-    } else {
-        while ($temp_user = mysqli_fetch_assoc($user)) {
-            $submitDay = $temp_user['firstname'];
-            $dateFrom = $temp_user['lastname'];
-            $dateTo = $temp_user['email'];
-            $status = $temp_user['account_type'];
-        }
-    }
 }
 
 function userUpdate( $accountID, $temp_firstName, $temp_last_Name, $temp_email, $temp_password, $temp_accountType)
