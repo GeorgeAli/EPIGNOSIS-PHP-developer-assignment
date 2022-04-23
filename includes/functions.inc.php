@@ -38,7 +38,7 @@ function invalidLastName($lastname){
 
 
 function invalidEmail($email){
-    
+
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $result = true;
     }else{
@@ -85,7 +85,7 @@ function emptyInputLogin($email, $pwd){
 }
 
 function printElement($element, $color = "white"){
-    
+
     $str = "<td bgcolor=$color style=\"text-align: center\">$element</td>";
 
     return $str;
@@ -124,7 +124,7 @@ function printRowUsers($firstname, $lastname, $email, $type){
 function checkDates($startDate, $endDate){
 
     $diff = strtotime($endDate) - strtotime($startDate);
-    
+
     $diff = round($diff/86400);
 
     return $diff;

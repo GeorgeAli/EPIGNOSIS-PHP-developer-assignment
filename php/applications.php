@@ -4,17 +4,17 @@ include_once 'header.php';
 
 
 <h2 style="text-align: center;">Your Applications</h2>
-    
-    <form action="app_submit.php" method="post">
-        <button type="submit" name="app_submit">Submit a Request</button>
-    </form>
+
+<form action="app_submit.php" method="post">
+    <button type="submit" name="app_submit">Submit a Request</button>
+</form>
 
 
 
 
 
 
-<table border="1" cellspacing = "8" id="table_of_applications">
+<table border="1" cellspacing="8" id="table_of_applications">
     <caption>Your applications</caption>
     <tr>
         <th>Date Submitted</th>
@@ -23,27 +23,30 @@ include_once 'header.php';
         <th>Status</th>
     </tr>
 
-    <?php 
+    <?php
 
-        require_once '../includes/functions.inc.php';
-        require_once '../includes/dfunctions.inc.php';
+    require_once '../includes/functions.inc.php';
+    require_once '../includes/dfunctions.inc.php';
 
 
-        if(isset($_SESSION['type'])){
-            if($_SESSION["type"] == "0"){
-                if(isset($_SESSION["id"])){
-                    //kapoia while
+    if (isset($_SESSION['type'])) {
+        if ($_SESSION["type"] == "0") {
+            if (isset($_SESSION["id"])) {
 
-                    echo printRowApp("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Rejected");
-                    echo printRowApp("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Rejected");
-                    echo printRowApp("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Approved");
-                    echo printRowApp("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Rejected");
-                    echo printRowApp("22/4/2022", "24/4/2022 - 24/4/2022", 1, "Pending");
-                    
+                $application = getApplications($_SESSION["id"]);
+
+                if ($application == false || mysqli_num_rows($application) == 0) {
+                    return false;
+                } else {
+                    while ($temp_application = mysqli_fetch_assoc($application)) {
+
+                        $days_requested = checkDates($temp_application['dateFrom'], $temp_application['dateTo']);
+                        echo printRowApp($temp_application['submitDay'], $temp_application['dateFrom'] . " - " . $temp_application['dateTo'], $days_requested, $temp_application['status']);
+                    }
                 }
             }
-
         }
+    }
 
 
     ?>
