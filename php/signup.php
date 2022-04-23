@@ -1,10 +1,10 @@
 <?php
-    include_once 'php/header.php';
+    include_once 'header.php';
 ?>
 
     <section class="signup-form">
         <h2>Sign Up</h2>
-        <form action="/epignosis/includes/signup.inc.php" method="post">
+        <form action="../includes/signup.inc.php" method="post">
         <input type="text" name="firstname" placeholder="First name...">
         <input type="text" name="lastname" placeholder="Last name...">
         <input type="text" name="email" placeholder="Email...">
@@ -48,5 +48,5 @@
 
 
 <?php
-    include_once 'php/footer.php';
+    include_once 'footer.php';
 ?>
