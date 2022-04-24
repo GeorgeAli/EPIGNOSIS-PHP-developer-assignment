@@ -1,3 +1,7 @@
+<!----
+@author John Tzortzakis
+finctions.inc.php contains functions that are used throughout the program for error checking and printing. Coded in PHP.
+--->
 <?php
 
 

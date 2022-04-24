@@ -1,3 +1,7 @@
+<!----
+@author George Alivertis
+contactform.php "sends" an email/request to the admin regarding the applications of the user(employee). Coded in PHP.
+--->
 <?php
 
 if (isset($_POST['submit'])) { 

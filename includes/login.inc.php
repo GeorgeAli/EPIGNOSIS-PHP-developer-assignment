@@ -1,3 +1,8 @@
+<!----
+@author John Tzortzakis
+login.inc.php checks and handles errors regarding the login prosess. Coded in PHP
+and php functions from functions.inc.php and dfunctions.inc.php respectively
+--->
 <?php
 
 

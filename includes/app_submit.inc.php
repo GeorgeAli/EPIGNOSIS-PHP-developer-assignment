@@ -1,3 +1,9 @@
+<!----
+@author John Tzortzakis
+@author George Alivertis
+app_submit.inc.php checks and handles errors regarding the application submit prosess. Then, makes the submission. Coded in PHP
+and php functions from functions.inc.php and dfunctions.inc.php respectively
+--->
 <?php
 
 function isValid($str)

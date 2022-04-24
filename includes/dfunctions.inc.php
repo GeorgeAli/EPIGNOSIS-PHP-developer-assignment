@@ -1,3 +1,7 @@
+<!----
+@author Georhe Alivertis
+dfinctions.inc.php contains functions that are used throughout the program for creating and manipulate the database. Coded in PHP/SQL.
+--->
 <?php
 
 // Connects to DB epignosis if it does exist. Otherwise it gets created, then it connects.

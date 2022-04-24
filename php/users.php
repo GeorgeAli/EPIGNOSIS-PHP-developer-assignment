@@ -1,5 +1,14 @@
+<!----
+@author John Tzortzakis
+users.php prints the list of users in an HTML table. Coded Bootstrap/HTML/PHP
+and functions from functions.inc.php and dfunctions.inc.php respectively
+--->
+
 <?php
 include_once 'header.php';
+
+if(!isset($_SESSION['id']))
+    exit();
 ?>
 
 <h2 style="text-align: center;">The Employees</h2>

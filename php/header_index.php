@@ -1,3 +1,8 @@
+<!----
+@author John Tzortzakis
+header_index.php is the site's header. Coded in HTML/Bootstrap/CSS/PHP.
+(Basiclly the same as header.php)
+--->
 <?php
     session_start();
 ?>
@@ -22,6 +27,7 @@
                         if(isset($_SESSION["type"])){
 
                             if($_SESSION["type"] === "1"){
+                                echo "<li><a href='../php/email_applications.php'>Applications</a></li>";
                                 echo "<li><a href='../php/users.php'>Employees</a></li>";
                                 echo "<li><a href='../includes/logout.inc.php'>Logout</a></li>";
                             }else{

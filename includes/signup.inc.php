@@ -1,3 +1,9 @@
+<!----
+@author John Tzortzakis
+@author George Alivertis
+signup.inc.php checks and handles errors regarding the signup prosess. Coded in PHP
+and php functions from functions.inc.php and dfunctions.inc.php respectively
+--->
 <?php
 
 

@@ -1,5 +1,15 @@
+<!----
+@author John Tzortzakis
+@author George Alivertis
+signup.php is a form that allows admins to signup new users. Coded in HTML/Bootstrap/PHP
+and php functions from functions.inc.php and dfunctions.inc.php respectively
+--->
+
 <?php
 include_once 'header.php';
+
+if(!isset($_SESSION['id']))
+    exit();
 ?>
 
     <h2>Sign Up</h2>

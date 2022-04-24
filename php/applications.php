@@ -1,5 +1,17 @@
+<!----
+@author John Tzortzakis
+@author George Alivertis
+applications.php is a HTML table that shows the applications of the logged in user(employee). Coded in HTML/Bootstrap/PHP
+and php functions from functions.inc.php and dfunctions.inc.php respectively
+--->
 <?php
 include_once 'header.php';
+
+
+if(!isset($_SESSION['id'])){
+    exit();
+}
+
 ?>
 
 

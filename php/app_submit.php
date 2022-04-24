@@ -1,5 +1,13 @@
+<!----
+@author John Tzortzakis
+app_submit.php is a form that allows employess to fill in an application. Coded in HTML/Bootstrap/PHP
+and php functions from functions.inc.php and dfunctions.inc.php respectively
+--->
 <?php
 include_once 'header.php';
+
+if(!isset($_SESSION['id']))
+    exit();
 ?>
 
 <section >
