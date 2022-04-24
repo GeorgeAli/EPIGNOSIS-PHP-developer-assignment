@@ -39,3 +39,24 @@ To run the program:
 -Open Browser
 -type on URL address: localhost/EPIGNOSIS-PHP-developer-assignment-main/
 }
+
+Program Instructions:
+
+-Run program
+
+-Login as Admin or Employee
+
+-if Logged in as Admin{
+    -Review a list with all users
+    -Edit any user
+    -Signup new Employees
+    -Review vacation applications
+    -Logout
+}
+-if Logged in as Employee{
+    -Review a list with employee's previous applications
+    -fill in an vacation application
+    -Logout
+}
+
+
