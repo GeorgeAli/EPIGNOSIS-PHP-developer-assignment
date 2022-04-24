@@ -5,7 +5,7 @@ ADMIN credentials:
 email: admin@epignosis.com
 password: admin
 
-Some users credentials:
+Users credentials:
 email: George@epignosis.com     (Starts with applications already submited)
 password: 123567
 
@@ -17,6 +17,17 @@ password: v25cqW
 
 email: Marios@epignosis.com
 password: 2V5# 24 5 
+
+email: Panagiotis@epignosis.com
+password: Panagiotis
+
+email: Eleni@epignosis.com
+password: DROP DATABASE
+
+email: Euthimia@epignosis.com
+password: admin
+
+
 
 To run the program:
 -Copy .zip inside XAMPP\installation\htdocs
