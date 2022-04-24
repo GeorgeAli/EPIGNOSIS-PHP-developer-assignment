@@ -8,63 +8,29 @@ and php functions from functions.inc.php and dfunctions.inc.php respectively
 <?php
 include_once 'header.php';
 
-if(!isset($_SESSION['id']))
+if(!isset($_SESSION['id'])){
+
+    header("location: ../index.php?MinEisaikakosAnthropakos");
     exit();
+}
 ?>
 
     <h2>Sign Up</h2>
 
     <form action="../includes/signup.inc.php" method="post">
     <div class="form-group w-50 p-3">
-            <label for="first_name">First Name</label>
-                <?php 
+        <label for="first_name">First Name</label>
 
-                    require_once '../includes/dfunctions.inc.php';
-                    $is_connected = connectDB();
-
-                    $current_users = mysqli_num_rows(mysqli_query($is_connected, "SELECT * FROM users;"));
-                    $accid = -1;
-                    
-                    for ($i=0; $i < $current_users; $i++) { 
-                        if(isset($_POST["$i"])){
-                            $accid=$i;
-                        }
-                    }
-                    
-                    
-                    if($accid !== -1){
-                        $user = getUser($_SESSION["id"]);
-                        if ($user == false || mysqli_num_rows($user) == 0) {
-                           
-                        } else {
-                            while ($temp_user = mysqli_fetch_assoc($user)) {
-                                $fname = $temp_user['firstname'];
-                                $lname = $temp_user['lastname'];
-                                $mail = $temp_user['email'];
-                                $tp = $temp_user['account_type'];
-                                $bt = "Update";
-                            }
-                        }
-                        
-                    }else{
-                        $fname = "";
-                        $lname = "";
-                        $mail = "";
-                        $tp = 0;
-                        $bt = "Create";
-                    }
-                    
-
-                    echo "<input type=\"text\" name=\"firstname\" class=\"form-control\" value='$fname' id=\"exampleFormControlInput1\" placeholder=\"First Name...\">";
-                ?>
+        <input type="text" name="firstname" class="form-control" value='' id="exampleFormControlInput1" placeholder="First Name...">
+                
         </div>
         <div class="form-group w-50 p-3">
             <label for="last_name">Last Name</label>
-            <?php echo "<input type=\"text\" name=\"lastname\" class=\"form-control\" value='$lname' id=\"exampleFormControlInput1\" placeholder=\"Last Name...\">"; ?>
+            <?php echo "<input type=\"text\" name=\"lastname\" class=\"form-control\" value='' id=\"exampleFormControlInput1\" placeholder=\"Last Name...\">"; ?>
         </div>
         <div class="form-group w-50 p-3">
             <label for="email">Email</label>
-            <?php echo "<input type=\"text\" name=\"email\" class=\"form-control\" value='$mail' id=\"exampleFormControlInput1\" placeholder=\"Email\">";?>
+            <?php echo "<input type=\"text\" name=\"email\" class=\"form-control\" value='' id=\"exampleFormControlInput1\" placeholder=\"Email\">";?>
             
         </div>
         <div class="form-group w-50 p-3">
@@ -90,7 +56,7 @@ if(!isset($_SESSION['id']))
 
             </select>
         </div>
-        <?php echo "<button type=\"submit\" name=\"submit\" class=\"btn btn-primary\">$bt</button>";?>
+        <?php echo "<button type=\"submit\" name=\"submit\" class=\"btn btn-primary\">Create</button>";?>
         
     </form>
     

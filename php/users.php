@@ -7,8 +7,10 @@ and functions from functions.inc.php and dfunctions.inc.php respectively
 <?php
 include_once 'header.php';
 
-if(!isset($_SESSION['id']))
+if(!isset($_SESSION['id'])){
+    header("location: ../index.php?MinEisaikakosAnthropakos");
     exit();
+}
 ?>
 
 <h2 style="text-align: center;">The Employees</h2>
@@ -17,6 +19,8 @@ if(!isset($_SESSION['id']))
         if (isset($_GET["error"])) {
             if ($_GET["error"] == "useralreadyexists") {
                 echo "<p>There is a user with this email!</p>";
+            }else if($_GET["error"] == "stmtfailedUpdateApp"){
+                echo "<p>Failed to Update the application!</p>";
             }
         }
     ?>
@@ -38,7 +42,7 @@ if(!isset($_SESSION['id']))
     </thead>
     <tbody>
 
-    <form action="signup.php" method="post">
+    <form action="update.php" method="post">
     <?php
         require_once '../includes/functions.inc.php';
         require_once '../includes/dfunctions.inc.php';
@@ -48,7 +52,7 @@ if(!isset($_SESSION['id']))
             if ($_SESSION["type"] == "1") {
                 if (isset($_SESSION["id"])) {
 
-                    $user = getUser($_SESSION["id"]);
+                    $user = getOtherUser($_SESSION["id"]);
 
                     if ($user == false || mysqli_num_rows($user) == 0) {
                         return false;
@@ -68,6 +72,23 @@ if(!isset($_SESSION['id']))
                 }
             }
         }
+
+    
+
+        $applications = getPendingApplications();
+        $rows = mysqli_num_rows($applications);
+
+        for ($i=0; $i < $rows; $i++) { 
+            $temp_applications = mysqli_fetch_assoc($applications);
+            $appid=$temp_applications['applicationID'];
+            if(isset($_POST["button_appr$appid"])){
+                applicationUpdate($appid, "Approved");
+            }
+            if(isset($_POST["button_rej$appid"])){
+                applicationUpdate($appid, "Rejected");
+            }
+        }
+
 
     ?>
     </form>

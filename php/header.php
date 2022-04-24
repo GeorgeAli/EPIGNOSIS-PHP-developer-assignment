@@ -1,5 +1,6 @@
 <!----
 @author John Tzortzakis
+@author George Alivertis
 header.php is the site's header. Coded in HTML/Bootstrap/CSS/PHP.
 (Basiclly the same as header_index.php)
 --->
@@ -24,12 +25,23 @@ header.php is the site's header. Coded in HTML/Bootstrap/CSS/PHP.
                 <ul class="nav-links">
                     <?php
 
+                        require_once '../includes/dfunctions.inc.php';
+
                         if(isset($_SESSION["type"])){
 
                             if($_SESSION["type"] === "1"){
-                                echo "<li><a href='../php/email_applications.php'>Applications</a></li>";
-                                echo "<li><a href='../php/users.php'>Employees</a></li>";
-                                echo "<li><a href='../includes/logout.inc.php'>Logout</a></li>";
+
+
+                                if (isset($_SESSION["id"])) {
+                                    $pendingApplications = getPendingApplications();
+                                    $numberApp = mysqli_num_rows($pendingApplications);  
+                                        echo "<li><a href='../php/email_applications.php'>Applications ($numberApp pending)</a></li>";
+                                        echo "<li><a href='../php/users.php'>Employees</a></li>";
+                                        echo "<li><a href='../includes/logout.inc.php'>Logout</a></li>";
+                                } else {
+                                    header("location: ../php/login.php?internalerror");
+                                }
+
                             }else{
                                 echo "<li><a href='../php/applications.php'>Your applications</a></li>";
                                 echo "<li><a href='../includes/logout.inc.php'>Logout</a></li>";

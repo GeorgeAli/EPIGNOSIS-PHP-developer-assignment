@@ -8,7 +8,7 @@ and php functions from functions.inc.php and dfunctions.inc.php respectively
 
 function isValid($str)
 {
-    return preg_match('/[^A-Za-z0-9.#\\-$]/', $str);
+    return preg_match('/[^A-Za-z0-9.#\\-$ ]/', $str);
 }
 
 if (isset($_POST['submit_app'])) {

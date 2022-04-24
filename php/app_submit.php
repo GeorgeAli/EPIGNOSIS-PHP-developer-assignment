@@ -7,6 +7,7 @@ and php functions from functions.inc.php and dfunctions.inc.php respectively
 include_once 'header.php';
 
 if(!isset($_SESSION['id']))
+    header("location: ../index.php?MinEisaikakosAnthropakos");
     exit();
 ?>
 
@@ -49,13 +50,6 @@ if(!isset($_SESSION['id']))
                 }
             }
         ?>
-
-
-
-
-
-
-
 
 
 

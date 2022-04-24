@@ -83,6 +83,14 @@ function initUsers()
     mysqli_close($is_connected);
 }
 
+function getPendingApplications()
+{
+    $is_connected = connectDB();
+
+    return mysqli_query($is_connected, "SELECT * FROM applications WHERE status = 'Pending';");
+}
+
+
 function getApplications($accountID)
 {
     $is_connected = connectDB();
@@ -90,8 +98,15 @@ function getApplications($accountID)
     $temp_accountID = intval($accountID);
 
     return mysqli_query($is_connected, "SELECT * FROM applications where accountID = $temp_accountID ORDER BY submitDay DESC;");
+}
 
-    mysqli_close($is_connected);
+function getOtherUser($accountID)
+{
+    $is_connected = connectDB();
+
+    $accountID = intval($accountID);
+
+    return mysqli_query($is_connected, "SELECT * FROM users where accountID <> $accountID;");
 }
 
 function getUser($accountID)
@@ -100,9 +115,7 @@ function getUser($accountID)
 
     $accountID = intval($accountID);
 
-    return mysqli_query($is_connected, "SELECT * FROM users where accountID <> $accountID;");
-
-    mysqli_close($is_connected);
+    return mysqli_query($is_connected, "SELECT * FROM users where accountID = $accountID;");
 }
 
 function userUpdate( $accountID, $temp_firstName, $temp_last_Name, $temp_email, $temp_password, $temp_accountType)
@@ -118,7 +131,7 @@ function userUpdate( $accountID, $temp_firstName, $temp_last_Name, $temp_email, 
     $stmt = mysqli_stmt_init($is_connected);
 
     if (!mysqli_stmt_prepare($stmt, $query)) {
-        header("location: ../index.php?error=stmtfailedInsert");
+        header("location: ../php/signup.php?error=stmtfailedInsert");
         mysqli_close($is_connected);
         exit();
     }
@@ -138,7 +151,7 @@ function userLoginCheck($temp_email, $temp_password)
     $stmt = mysqli_stmt_init($is_connected);
 
     if (!mysqli_stmt_prepare($stmt, "SELECT * FROM users WHERE email = ? and password = ?;")) {
-        header("location: ../index.php?error=stmtfailed");
+        header("location: ../index.php?error=stmtfailedLogin");
         mysqli_close($is_connected);
         exit();
     }
@@ -174,7 +187,7 @@ function userSignUpCheck($temp_email)
     $stmt = mysqli_stmt_init($is_connected);
 
     if (!mysqli_stmt_prepare($stmt, "SELECT * FROM users WHERE email = ?;")) {
-        header("location: ../index.php?error=stmtfailedsignup");
+        header("location: ../php/signup.php?error=stmtfailedsignup");
         mysqli_close($is_connected);
         exit();
     }
@@ -208,7 +221,7 @@ function userInsert($temp_firstName, $temp_last_Name, $temp_email, $temp_passwor
     $stmt = mysqli_stmt_init($is_connected);
 
     if (!mysqli_stmt_prepare($stmt, $query)) {
-        header("location: ../index.php?error=stmtfailedInsert");
+        header("location: ../php/signup.php?error=stmtfailedInsert");
         mysqli_close($is_connected);
         exit();
     }
@@ -238,7 +251,7 @@ function applicationInsert($temp_accountID, $temp_dateFrom, $temp_dateTo, $temp_
     $stmt = mysqli_stmt_init($is_connected);
 
     if (!mysqli_stmt_prepare($stmt, $query)) {
-        header("location: ../index.php?error=stmtfailedInsert");
+        header("location: ../php/applications.php?error=stmtfailedInsert");
         mysqli_close($is_connected);
         exit();
     }
@@ -258,3 +271,27 @@ function printResult($result_set)
         print_r($row);
     }
 }
+
+function applicationUpdate($temp_applicationID, $status)
+{
+    $is_connected = connectDB();
+
+    $accountID = intval($temp_applicationID);
+
+    $query = "UPDATE applications SET status = ? WHERE applicationID = ?";
+
+    $stmt = mysqli_stmt_init($is_connected);
+
+    if (!mysqli_stmt_prepare($stmt, $query)) {
+        header("location: ../php/users.php?error=stmtfailedUpdateApp");
+        mysqli_close($is_connected);
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "si", $status, $accountID);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+    mysqli_close($is_connected);
+}
+
