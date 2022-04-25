@@ -112,13 +112,15 @@ function printRowUsers($firstname, $lastname, $email, $type){
 
 }
 
-function email_app($email, $firstname, $lastname, $reason, $appid){
+function email_app($email, $firstname, $lastname, $reason, $appid, $datefrom, $dateto){
     
     $return_email = "<div>";
     $return_email .= "<p>---------------------------------------------------------</p>";
     $return_email .= "<pre>";
     $return_email .= "<b>From: </b><i>$firstname $lastname </i> ($email)<br><br>";
-    $return_email .= $reason."<br><br>";
+    $return_email .= "Dear supervisor, employee $firstname $lastname requested \nfor some time off, starting on $datefrom and ending on $dateto, \nstating the reason: $reason";
+
+    $return_email .= "<br><br>";
 
     $return_email .= "<form action=\"users.php\" method=\"post\">";
     $return_email .= "<button type=\"submit\" name=\"button_appr$appid\" class=\"btn btn-success\">Approve</button>";

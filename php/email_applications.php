@@ -37,8 +37,11 @@ while ($temp_application = mysqli_fetch_assoc($pendingApp)) {
     $email = $temp_user['email'];
     $reason = $temp_application['reason'];
     $appid = $temp_application['applicationID'];
+    $datefrom = $temp_application['dateFrom'];
+    $dateto = $temp_application['dateTo'];
 
-    echo email_app($email, $firstname, $lastname, $reason, $appid);
+
+    echo email_app($email, $firstname, $lastname, $reason, $appid, $datefrom, $dateto);
 }
 
 
